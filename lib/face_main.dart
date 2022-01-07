@@ -34,6 +34,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+    int index = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -41,28 +42,39 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
         child: Container(
           color: Colors.transparent,
-          margin: const EdgeInsets.symmetric(vertical: 30),
-          padding: const EdgeInsets.only(top: 15),
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+          padding: const EdgeInsets.only(top: 15,),
           child: Column(
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  IconButton(onPressed: (){}, icon: const Icon(Icons.camera_alt,color: Colors.black, size: 40,)),
+                  const SizedBox(width: 11,),
+                  IconButton(onPressed: (){}, icon: const Icon(Icons.camera_alt,color: Colors.black, size: 30,)),
+                  const SizedBox(width: 11,),
                   Expanded(
                       child: TextField(
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.only(top: 5),
+                          fillColor: Colors.grey[200],
+                          filled: true,
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50),
+                            borderRadius: BorderRadius.circular(40),
+                            borderSide: const BorderSide(width: 1, color: Colors.white),
                           ),
                           hintText: 'Search',
                           prefixIcon: const Icon(Icons.search_sharp),
                         ),
                       ),
                   ),
-                  const Icon(Icons.messenger,color: Colors.blue, size: 40,),
+                  const SizedBox(width: 22,),
+                  GestureDetector(
+                    onTap: (){},
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 10),
+                        child: Image.asset('assets/images/messenger.png', width: 30, height: 30,),
+                    ),
+                  ),
+                //  const SizedBox(width: 10,),
                 ],
               ),
               const SizedBox(height: 15,),
@@ -70,10 +82,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 child: Row(
                   children: const [
-                    Text('Stories', style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+                    SizedBox(width: 8,),
+                    Text('Stories', style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: 20),),
                     Spacer(),
-                    Text('Se Arcives', style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
-                    Icon(Icons.arrow_forward_ios,color: Colors.black, size: 15,),
+                    Text('See Archives', style: TextStyle(color: Colors.black,fontSize: 18),),
+                    SizedBox(width: 4,),
+                    Icon(Icons.arrow_forward_ios,color: Colors.black, size: 18,),
+
                   ],
                 ),
               ),
@@ -88,17 +103,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           children:users.map((e) => FaceUserWidget(e)).toList()
                       ),
                     ),
+                    const SizedBox(height: 15,),
                     Container(
                       child: Column(
                         children: posts.map((p) => FacePostWidget(p)).toList(),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: FloatingActionButton(
-                        backgroundColor: Colors.indigo,
-                        onPressed: (){},
-                        child: const Icon(Icons.add,size: 35,),
                       ),
                     ),
                   ],
@@ -108,6 +116,34 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
+      floatingActionButton: Align(
+        alignment: const Alignment(1,0.85),
+        child: FloatingActionButton(
+          backgroundColor: Colors.indigo,
+          onPressed: (){},
+          child: const Icon(Icons.add,size: 35,),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.indigo,
+        unselectedItemColor: Colors.grey,
+        currentIndex: index,
+        onTap: (newIndex){
+          setState(() {
+            this.index = newIndex;
+          });
+        },
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.calendar_today_outlined, size: 30,), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.perm_identity, size: 30), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.play_circle_outline_rounded, size: 30), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.add_alert_rounded, size: 30), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.image, size: 30), label: ''),
+        ],
+      ),
+
     );
   }
 }

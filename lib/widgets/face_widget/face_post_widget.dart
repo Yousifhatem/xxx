@@ -23,17 +23,22 @@ class _FacePostWidgetState extends State<FacePostWidget> {
               Row(
                 children: [
                   CircleAvatar(
-                    radius: 30,
+                    radius: 20,
                     backgroundImage: NetworkImage(widget.postFaceModel.postCreator.imageUrl),
                   ),
-                  const SizedBox(width: 10,),
-                  Text('${widget.postFaceModel.postCreator.name} updated this cover photo',style: const TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
+                  const SizedBox(width: 8),
+                  Text(
+                    '${widget.postFaceModel.postCreator.name} updated this cover photo',
+                    style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+                    overflow: TextOverflow.fade,
+                  ),
                   const Spacer(),
                   const Icon(Icons.more_horiz),
                 ],
               ),
               Container(
-                  padding: const EdgeInsets.only(left: 90),
+                //  padding: const EdgeInsets.only(left: 90),
+                margin: const EdgeInsets.symmetric(horizontal: 50),
                   child: Text(
                     widget.postFaceModel.postCreator.creatingTime,
                     style: const TextStyle(color: Colors.grey),
@@ -62,35 +67,39 @@ class _FacePostWidgetState extends State<FacePostWidget> {
               ),
               const SizedBox(height: 10,),
               const Divider(color: Colors.grey,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(onPressed: (){
-                    setState(() {
-                      widget.postFaceModel.likeButton();
-                    });
-                  }, icon: const Icon(Icons.favorite)),
-                  const Text('Like', style: TextStyle(color: Colors.black),),
-                  IconButton(onPressed: (){
-                    setState(() {
-                      widget.postFaceModel.commentButton();
-                    });
-                  }, icon: const Icon(Icons.comment)
-                  ),
-                  const Text('Comment', style: TextStyle(color: Colors.black),),
-                ],
+              const SizedBox(height: 10,),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 50),
+                child: Row(
+                  children: [
+                    InkWell(
+                      onTap: (){
+                        setState(() {
+                          widget.postFaceModel.likeButton();
+                        });
+                      },
+                        child: Image.asset('assets/images/like.png',width: 25, height: 25,),
+                    ),
+                    const SizedBox(width: 10,),
+                    const Text('Like', style: TextStyle(fontSize: 16),),
+                    const SizedBox(width: 100,),
+                    InkWell(
+                      onTap: (){
+                        setState(() {
+                          widget.postFaceModel.commentButton();
+                        });
+                      },
+                        child: Image.asset('assets/images/comment.png',width: 25, height: 25,),
+                    ),
+                    const SizedBox(width: 10,),
+                    const Text('Comment', style: TextStyle(fontSize: 16),),
+                  ],
+                ),
               ),
+              const SizedBox(height: 10,),
             ],
           ),
         ),
-        // Align(
-        //   alignment: Alignment.bottomRight,
-        //   child: FloatingActionButton(
-        //     backgroundColor: Colors.indigo,
-        //     onPressed: (){},
-        //     child: const Icon(Icons.add,size: 35,),
-        //   ),
-        // ),
       ],
     );
   }

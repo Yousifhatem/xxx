@@ -1,5 +1,5 @@
-import 'package:facebook_screen_app01/widgets/post_widget.dart';
-import 'package:facebook_screen_app01/widgets/user_widget.dart';
+import 'package:facebook_screen_app01/widgets/instagram_widget/post_widget.dart';
+import 'package:facebook_screen_app01/widgets/instagram_widget/user_widget.dart';
 import 'package:flutter/material.dart';
 
 

@@ -68,7 +68,7 @@ int activeIndex = 0;
             const SizedBox(height: 200,),
             Center(
                 child: Text(activeIndex == 0? 'Home Page' : 'Favorite', style: TextStyle(color: !isDarkMode? Colors.white : Colors.black,),),
-            ),gi
+            ),
           ],
         ),
       ),
